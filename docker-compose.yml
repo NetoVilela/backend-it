@@ -2,22 +2,23 @@ version: '3.3'
 services:
   database:
     image: postgres
-    container_name: database-container
+    container_name: database-container-it
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: mydatabase
-      TZ: America/Recife # Adicione esta linha
+      TZ: America/Recife
     volumes:
       - ./data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - '5432:5432'
     networks:
       - network-myproject
   node:
     image: 'node:18.16.0'
-    container_name: api-container
+    container_name: api-container-it
     working_dir: /usr/src/api
     environment:
       - NODE_ENV=developmnent

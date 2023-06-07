@@ -41,3 +41,7 @@ public/attachments/*
 
 yarn.lock
 package-lock.json
+
+.vscode
+./vscode
+/.vscode
