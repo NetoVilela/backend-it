@@ -11,52 +11,52 @@ export class MoviesEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   poster_link: string;
 
-  @Column()
-  series_title: boolean;
+  @Column({ nullable: true })
+  series_title: string;
 
-  @Column()
-  relesased_year: number;
+  @Column({ nullable: true })
+  released_year: number;
 
-  @Column()
+  @Column({ nullable: true })
   certificate: string;
 
-  @Column()
+  @Column({ nullable: true })
   runtime: string;
 
-  @Column()
+  @Column({ nullable: true })
   genre: string;
 
   @Column('decimal', { scale: 2, nullable: true })
   imdb_raiting: number;
 
-  @Column()
+  @Column({ nullable: true })
   overview: string;
 
-  @Column()
+  @Column({ nullable: true })
   meta_score: number;
 
-  @Column()
+  @Column({ nullable: true })
   director: string;
 
-  @Column()
+  @Column({ nullable: true })
   star1: string;
 
-  @Column()
+  @Column({ nullable: true })
   star2: string;
 
-  @Column()
+  @Column({ nullable: true })
   star3: string;
 
-  @Column()
+  @Column({ nullable: true })
   star4: string;
 
-  @Column()
+  @Column({ nullable: true })
   no_of_votes: number;
 
-  @Column()
+  @Column({ nullable: true })
   gross: string;
 
   @CreateDateColumn({ name: 'created_at' })

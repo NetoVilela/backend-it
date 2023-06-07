@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { MoviesEntity } from './movies.entity';
 import { Repository } from 'typeorm';
@@ -34,23 +35,25 @@ export class MoviesService {
   }
 
   async importmovies() {
-    const filePath = path.join(`${__dirname}/../../../public/files`, 'imdb_top_1000.csv');
+    const filePath = path.join(
+      `${__dirname}/../../../public/files`,
+      'imdb_top_1000.csv',
+    );
 
     let movies = [];
     movies = await this.readCSV(filePath);
-    console.log(movies);
 
     for (const data of movies) {
       const objMovie = {
         poster_link: data.poster_link,
         series_title: data.series_title,
-        released_year: data.released_year,
+        released_year: /^\d+$/.test(data.released_year) ? parseInt(data.released_year) : 0,
         certificate: data.certificate,
         runtime: data.runtime,
         genre: data.genre,
         imdb_raiting: parseFloat(data.imdb_raiting),
         overview: data.overview,
-        meta_score: parseFloat(data.meta_score),
+        meta_score: data.meta_score ? parseFloat(data.meta_score) : 0,
         director: data.director,
         star1: data.star1,
         star2: data.star2,
@@ -59,11 +62,10 @@ export class MoviesService {
         no_of_votes: parseFloat(data.no_of_votes),
         gross: data.gross,
       };
-      console.log(objMovie);
       const movie = this.moviesRepository.create(objMovie);
       await this.moviesRepository.save(movie);
     }
-    
-    return "importmovies";
+
+    return `${movies.length} registers importeds.`;
   }
 }
