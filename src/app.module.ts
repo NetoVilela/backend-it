@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './app/users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './app/users/users.module';
+import { MoviesModule } from './app/movies/movies.module';
 
 @Module({
   imports: [
@@ -17,8 +18,9 @@ import { AuthModule } from './auth/auth.module';
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true, // Não utilizar em PROD
     } as TypeOrmModule),
-    UsersModule,
     AuthModule,
+    UsersModule,
+    MoviesModule,
   ],
   controllers: [],
   providers: [],
